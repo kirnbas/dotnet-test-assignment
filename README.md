@@ -49,6 +49,16 @@ Your task is to create a functional MCP server that provides real weather data t
 
 4. Configure your API key as an environment variable
 
+   - On Windows (PowerShell):
+     ```powershell
+     setx OPENWEATHER_API_KEY "<your_api_key_here>"
+     ```
+   - On macOS/Linux (bash):
+     ```bash
+     export OPENWEATHER_API_KEY="<your_api_key_here>"
+     ```
+   - The server reads `OPENWEATHER_API_KEY` (or falls back to `WEATHER_API_KEY`).
+
 ### Example Tool Structure
 ```csharp
 [McpServerTool]
@@ -60,6 +70,16 @@ public async Task<string> GetCurrentWeather(
     // Your implementation here
 }
 ```
+
+### Implemented Tools
+
+- `GetCurrentWeather(city, countryCode?, units?)`: Returns structured current conditions using OpenWeatherMap.
+- `GetWeatherForecast(city, countryCode?, units?, days?)`: Returns at least a 3-day forecast summarized per day.
+- `GetWeatherAlerts(city, countryCode?)`: Returns active alerts if available; otherwise an empty list.
+
+### Units
+
+Supported units are `metric`, `imperial`, and `standard`. Defaults to `metric`.
 
 ## Evaluation Criteria
 
